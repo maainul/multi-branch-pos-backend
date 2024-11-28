@@ -6,6 +6,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import connectDB from "./dbConnection.js";
 import setupRoutes from "./appRoute.js";
+import { errorHandler } from "./middlewares/errorHandler.js";
 
 // configure env
 dotenv.config();
@@ -29,6 +30,9 @@ app.use(
 
 // call routes
 setupRoutes(app);
+
+// Error-handling middleware
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 8081;
 

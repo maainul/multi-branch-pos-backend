@@ -1,5 +1,4 @@
 export const listExpenseTypeCtrl = async (req, res) => {
-  console.log("====>", req.query);
   return res.status(201).json({
     success: true,
     message: "ExpenseType list retrieve successfully",
