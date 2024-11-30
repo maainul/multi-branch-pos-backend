@@ -1,62 +1,62 @@
 import {
-  createExpenseTypeService,
-  deleteExpenseTypeService,
-  listExpenseTypeService,
-  showExpenseTypeService,
-  updateExpenseTypeService,
-  updateExpenseTypeStatusService,
-} from "../services/expenseTypeService.js";
+  createBrandService,
+  deleteBrandService,
+  listBrandService,
+  showBrandService,
+  updateBrandService,
+  updateBrandStatusService,
+} from "../services/brandService.js";
 import { sendResponse } from "../utils/responseHelper.js";
 
-export const listExpenseTypeCtrl = async (req, res, next) => {
+export const listBrandCtrl = async (req, res, next) => {
   try {
-    const branches = await listExpenseTypeService();
+    const branches = await listBrandService();
     sendResponse(res, 200, "Branch list retrieved successfully", branches);
   } catch (error) {
     next(error);
   }
 };
 
-export const createExpenseTypeCtrl = async (req, res, next) => {
+export const createBrandCtrl = async (req, res, next) => {
   try {
-    const newBranch = await createExpenseTypeService(req.body);
+    const newBranch = await createBrandService(req.body);
     sendResponse(res, 201, "Brance added successfully", newBranch);
   } catch (error) {
     next(error);
   }
 };
 
-export const showExpenseTypeCtrl = async (req, res, next) => {
+export const showBrandCtrl = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const branch = await showExpenseTypeService(id);
+    const branch = await showBrandService(id);
     sendResponse(res, 200, "Branch retrieved successfully", branch);
   } catch (error) {
     next(error);
   }
 };
 
-export const updateExpenseTypeCtrl = async (req, res, next) => {
+export const updateBrandCtrl = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const updatedBranch = await updateExpenseTypeService(id, req.body);
+    const updatedBranch = await updateBrandService(id, req.body);
     sendResponse(res, 200, "Branch updated successfully", updatedBranch);
   } catch (error) {
     next(error);
   }
 };
 
-export const deleteExpenseTypeCtrl = async (req, res, next) => {
+export const deleteBrandCtrl = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const deletedBranch = await deleteExpenseTypeService(id);
+    const deletedBranch = await deleteBrandService(id);
     sendResponse(res, 200, "Branch deleted successfully", deletedBranch);
   } catch (error) {
     next(error);
   }
 };
 
-export const updateExpenseTypeStatusCtrl = async (req, res, next) => {
+export const updateBrandStatusCtrl = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { status } = req.body;
@@ -67,7 +67,7 @@ export const updateExpenseTypeStatusCtrl = async (req, res, next) => {
       });
     }
 
-    const updateBranch = await updateExpenseTypeStatusService(id, status);
+    const updateBranch = await updateBrandStatusService(id, status);
     sendResponse(res, 200, "Branch status updated successfully", updateBranch);
   } catch (error) {
     next(error);
