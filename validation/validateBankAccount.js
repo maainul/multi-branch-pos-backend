@@ -9,6 +9,13 @@ export const validateBankAccount = async (data) => {
       "string.max": "accountHolder name should not exceed 50 characters",
       "any.required": "accountHolder name is required",
     }),
+    accountType: Joi.number().integer().min(1).max(10).required().messages({
+      "number.base": "accountType should be a type of number",
+      "number.integer": "accountType must be integer",
+      "number.min": "accountType must be at least 1",
+      "number.max": "accountType must be at most 4",
+      "any.required": "accountType is required",
+    }),
     accountNumber: Joi.string().min(5).max(12).required().messages({
       "string.base": "accountNumber  should be a type of text",
       "string.empty": "accountNumber  can not be empty",
@@ -39,6 +46,7 @@ export const validateBankAccount = async (data) => {
       "number.max": "Status must be at most 4",
       "any.required": "Status is required",
     }),
+    branchId: Joi.string().hex().length(24).required(),
   });
 
   const options = { abortEarly: false, allowUnknown: false };

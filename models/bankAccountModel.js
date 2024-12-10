@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const bankAccountSchema = new mongoose.Schema(
   {
     accountType: {
-      type: String,
+      type: Number,
       require: true,
     },
     accountHolder: {
@@ -19,7 +19,7 @@ const bankAccountSchema = new mongoose.Schema(
       require: true,
     },
     openDate: {
-      type: String,
+      type: Date,
       require: true,
     },
     status: {

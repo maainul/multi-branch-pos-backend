@@ -1,8 +1,9 @@
 import { validateBankAccount } from "../validation/validateBankAccount.js";
+import branchModel from "../models/branchModel.js";
 import bankAccountModel from "../models/bankAccountModel.js";
 import { validateObjectId } from "../utils/validateObjectId.js";
-
 export const createBankAccountService = async (bankAccountData) => {
+  // Form Valiation
   const { error, value } = await validateBankAccount(bankAccountData);
   if (error) {
     throw {
@@ -13,6 +14,7 @@ export const createBankAccountService = async (bankAccountData) => {
       })),
     };
   }
+  // Check Account Already Exists or Not
   const accountNumberExists = await bankAccountModel.findOne({
     accountNumber: bankAccountData.accountNumber,
   });
@@ -27,6 +29,20 @@ export const createBankAccountService = async (bankAccountData) => {
       ],
     };
   }
+  // Check Branch Id in the database or not
+  const branchExists = await branchModel.findById(bankAccountData.branchId);
+  if (!branchExists) {
+    throw {
+      status: 400,
+      details: [
+        {
+          label: "branchId",
+          message: "Branch Not Exists.Please Enter valid Branch ID",
+        },
+      ],
+    };
+  }
+  // Save Data in the database
   const newBankAccount = await bankAccountModel.create(value);
   return newBankAccount;
 };
